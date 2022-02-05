@@ -203,6 +203,8 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error.ejs', { err });
 })
 
-app.listen(3000, () => {
-    console.log('Serving on port 3000');
+//In production, tells Heroku the port to be used. If the env variable does not exist, default to 3000
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`);
 })
