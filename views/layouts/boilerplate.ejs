@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YelpCamp</title>
+    <!-- Link to Bootstrap 5 CSS-->
+    <link href="/stylesheets/bootstrap.css" rel="stylesheet" crossorigin="anonymous">
+
+    <!-- Mapbox Javascript and Stylesheet -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+
+    <!-- Custom stylesheets -->
+    <link rel="stylesheet" href="/stylesheets/app.css">
+
+</head>
+
+<!-- 
+    d-flex display flex
+    vh-100 minimum viewheight of 100
+ -->
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/navbar.ejs')%>
+    <main class="container mt-5">
+        <!-- Display flash message of succesful creation of campgrounds -->
+        <%- include('../partials/flash.ejs')%>
+        <!-- BODY -->
+        <%- body %>
+    </main>
+    <%- include('../partials/footer.ejs')%>
+    <!-- Link to Bootstrap 5 JS -->
+    <script src="/javascripts/bootstrap.js" crossorigin="anonymous"></script>
+
+
+    <!-- Script to validate forms -->
+    <script src="/javascripts/validateForms.js"></script>
+</body>
+
+</html>

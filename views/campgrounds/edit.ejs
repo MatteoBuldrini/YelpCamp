@@ -1,0 +1,61 @@
+<% layout('layouts/boilerplate.ejs') %>
+<!-- Edit form with default values for each campground -->
+<div class="row">
+    <h1 class="text-center">Edit Campground</h1>
+    <div class="col-md-6 offset-md-3">
+        <!-- The attribute "novalidate" tells the browser not to validate the form so that Bootstrap can take over. Then add the "required" attribute to inputs you want to be required. Finally, add the JavaScript to disable invalid form submissions -->
+        <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" novalidate class="validated-form"
+            enctype="multipart/form-data">
+            <!-- campground[property] is used to group different properties all together under campground in the request body -->
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="campground[title]"
+                    value="<%=campground.title%>" required>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="mb-3">
+                <label lass="form-label" for="location">Location</label>
+                <input class="form-control" type="text" id="location" name="campground[location]"
+                    value="<%=campground.location%>" required>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="mb-3">
+                <label lass="form-label" for="price">Campground Price</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price-label">$</span>
+                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                        aria-describedby="price-label" name="campground[price]" value="<%=campground.price%>" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label lass="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" id="description" name="campground[description]"
+                    required><%=campground.description%></textarea>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+            <!-- Upload images button, from Bootstrap -->
+            <div class="mb-3">
+                <label for="image" class="form-label">Add more image(s)</label>
+                <input class="form-control" type="file" id="image" name="image" multiple>
+            </div>
+            <!-- Display images -->
+            <div class="mb-3">
+                <% campground.images.forEach(function(img, i) { %>
+                <!-- img.thumbnail is the virtual defined in the Mongoose schema used to display images with fixed width -->
+                <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="">
+                <!-- Add checkboxes, used to remove images -->
+                <div class="form-check-inline">
+                    <!-- When the request is sent, this creates a deleteImages array containing all the img.filename for which the checkbox was selected -->
+                    <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                </div>
+                <label for="image-<%=i%>">Delete?</label>
+                <% }) %>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-info">Update Campground</button>
+            </div>
+        </form>
+        <a href="/campgrounds/<%= campground._id %>">Back to Campground</a>
+    </div>
+</div>
